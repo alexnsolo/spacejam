@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Shield : Damageable {
 
+	public event EventHandler Overloaded;
+
 	public int Capacity;
 	public TextMesh SPText;
-	public float OverloadRecoveryTime;
-	public float OverloadRecoveryPercentage;
 
-	private bool overloaded = false;
 	private SpriteRenderer spriteRenderer;
+	private bool shieldActive = true;
 
 	void Start() {
 		spriteRenderer = ((SpriteRenderer)renderer);
 	}
 	
 	void Update() {
-		if (overloaded) {
-			SPText.text = "SP: !!!!";
-		}
-		else {
-			SPText.text = "SP: " + Hitpoints.ToString();
+		if (SPText != null) {
+			if (!shieldActive) {
+				SPText.text = "SP: !!!!";
+			}
+			else {
+				SPText.text = "SP: " + Hitpoints.ToString();
+			}	
 		}
 		Color rendererColor = spriteRenderer.color;
 		rendererColor.a = ((float)Hitpoints / (float)Capacity);
@@ -28,24 +31,28 @@ public class Shield : Damageable {
 	}
 
 	public void Recharge(int amount) {
-		Hitpoints += amount;
-		if (Hitpoints > Capacity) Hitpoints = Capacity;
+		Hitpoints = Mathf.Min(Capacity, Hitpoints + amount);
+		if (!shieldActive) {
+			SwitchShieldOn();
+		}
 	}
 
 	protected override void OnDestroyed() {
-		overloaded = true;
-		SwitchShield(false);
-		Invoke("RecoverFromOverload", OverloadRecoveryTime); 
+		SwitchShieldOff();
+		if (Overloaded != null) {
+			Overloaded(this, new EventArgs());
+		}
 	}
 
-	void RecoverFromOverload() {
-		overloaded = false;
-		SwitchShield(true);
-		Hitpoints = Mathf.RoundToInt((float)Capacity * OverloadRecoveryPercentage);
+	void SwitchShieldOn() {
+		shieldActive = true;
+		collider2D.enabled = true;
+		renderer.enabled = true;
 	}
 
-	void SwitchShield(bool on) {
-		collider2D.enabled = on;
-		renderer.enabled = on;
+	void SwitchShieldOff() {
+		shieldActive = false;
+		collider2D.enabled = false;
+		renderer.enabled = false;
 	}
 }
