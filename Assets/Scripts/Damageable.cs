@@ -10,12 +10,12 @@ public class Damageable : MonoBehaviour {
 			Hitpoints -= amount;
 			if (Hitpoints <= 0) {
 				Hitpoints = 0;
-				OnDestroy();
+				OnDestroyed();
 			}	
 		}
 	}
 
-	protected virtual void OnDestroy() {
+	protected virtual void OnDestroyed() {
 		GameObject.Destroy(this.gameObject);
 	}
 }

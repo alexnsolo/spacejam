@@ -34,8 +34,8 @@ public class Ship : Damageable {
 		}
 	}
 
-	protected override void OnDestroy() {
+	protected override void OnDestroyed() {
 		GameObject.Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-		base.OnDestroy();
+		base.OnDestroyed();
 	}
 }

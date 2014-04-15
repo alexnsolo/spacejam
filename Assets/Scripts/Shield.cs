@@ -32,7 +32,7 @@ public class Shield : Damageable {
 		if (Hitpoints > Capacity) Hitpoints = Capacity;
 	}
 
-	protected override void OnDestroy() {
+	protected override void OnDestroyed() {
 		overloaded = true;
 		SwitchShield(false);
 		Invoke("RecoverFromOverload", OverloadRecoveryTime); 

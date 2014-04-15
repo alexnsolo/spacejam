@@ -5,7 +5,7 @@ public class Subsystem : Damageable {
 
 	public bool Operational = true;
 
-	protected override void OnDestroy() {
+	protected override void OnDestroyed() {
 		Operational = false;
 	}
 }
