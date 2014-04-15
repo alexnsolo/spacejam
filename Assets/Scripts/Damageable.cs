@@ -6,10 +6,12 @@ public class Damageable : MonoBehaviour {
 	public int Hitpoints;
 
 	public void TakeDamage(int amount) {
-		Hitpoints -= amount;
-		if (Hitpoints <= 0) {
-			Hitpoints = 0;
-			OnDestroy();
+		if (Hitpoints > 0) {
+			Hitpoints -= amount;
+			if (Hitpoints <= 0) {
+				Hitpoints = 0;
+				OnDestroy();
+			}	
 		}
 	}
 
