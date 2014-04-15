@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 
 public class Ship : Damageable {
-
-	public int Hitpoints;
+	
 	public Ship Target;
 	public TextMesh HPText;
 	public Weapon[] Weapons;
@@ -24,14 +23,6 @@ public class Ship : Damageable {
 		HPText.text = "HP: " + Hitpoints.ToString();
 	}
 
-	public override void TakeDamage(int amount) {
-		Hitpoints -= amount;
-		if (Hitpoints <= 0) {
-			Hitpoints = 0;
-			StartDestroy();
-		}
-	}
-
 	public void FireAtTarget() {
 		if (Target != null) {
 			foreach (Weapon weapon in Weapons) {
@@ -43,8 +34,8 @@ public class Ship : Damageable {
 		}
 	}
 
-	public void StartDestroy() {
+	protected override void OnDestroy() {
 		GameObject.Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-		GameObject.Destroy(this.gameObject);
+		base.OnDestroy();
 	}
 }

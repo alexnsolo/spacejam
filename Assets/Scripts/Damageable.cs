@@ -3,5 +3,17 @@ using System.Collections;
 
 public class Damageable : MonoBehaviour {
 
-	public virtual void TakeDamage(int amount) {}
+	public int Hitpoints;
+
+	public void TakeDamage(int amount) {
+		Hitpoints -= amount;
+		if (Hitpoints <= 0) {
+			Hitpoints = 0;
+			OnDestroy();
+		}
+	}
+
+	protected virtual void OnDestroy() {
+		GameObject.Destroy(this.gameObject);
+	}
 }

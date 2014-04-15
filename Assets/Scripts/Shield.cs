@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Shield : Damageable {
 
-	public int Strength;
 	public int Capacity;
 	public TextMesh SPText;
 	public float OverloadRecoveryTime;
@@ -15,38 +14,34 @@ public class Shield : Damageable {
 	void Start() {
 		spriteRenderer = ((SpriteRenderer)renderer);
 	}
-
-	public override void TakeDamage(int amount) {
-		Strength -= amount;
-		if (Strength <= 0) {
-			Strength = 0;
-			overloaded = true;
-			SwitchShield(false);
-			Invoke("RecoverFromOverload", OverloadRecoveryTime); 
-		}
-	}
-
-	public void Recharge(int amount) {
-		Strength += amount;
-		if (Strength > Capacity) Strength = Capacity;
-	}
-
+	
 	void Update() {
 		if (overloaded) {
 			SPText.text = "SP: !!!!";
 		}
 		else {
-			SPText.text = "SP: " + Strength.ToString();
+			SPText.text = "SP: " + Hitpoints.ToString();
 		}
 		Color rendererColor = spriteRenderer.color;
-		rendererColor.a = ((float)Strength / (float)Capacity);
+		rendererColor.a = ((float)Hitpoints / (float)Capacity);
         spriteRenderer.color = rendererColor;
+	}
+
+	public void Recharge(int amount) {
+		Hitpoints += amount;
+		if (Hitpoints > Capacity) Hitpoints = Capacity;
+	}
+
+	protected override void OnDestroy() {
+		overloaded = true;
+		SwitchShield(false);
+		Invoke("RecoverFromOverload", OverloadRecoveryTime); 
 	}
 
 	void RecoverFromOverload() {
 		overloaded = false;
 		SwitchShield(true);
-		Strength = Mathf.RoundToInt((float)Capacity * OverloadRecoveryPercentage);
+		Hitpoints = Mathf.RoundToInt((float)Capacity * OverloadRecoveryPercentage);
 	}
 
 	void SwitchShield(bool on) {
