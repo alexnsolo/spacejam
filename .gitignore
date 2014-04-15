@@ -4,4 +4,5 @@ ProjectSettings
 *.sln
 *.userprefs
 Assets/Plugins
+Assets/External
 **/*.meta
