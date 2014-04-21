@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Ship : Damageable {
 	
 	public Ship Target;
-	public TextMesh HPText;
+	public Shield Shield;
 	public Weapon[] Weapons;
 	public Engine[] Engines;
 	public GameObject ExplosionPrefab;
@@ -19,10 +19,6 @@ public class Ship : Damageable {
 			w.Owner = this;
 		}
 		Physics2D.IgnoreLayerCollision(DamageableLayer, DamageableLayer);
-	}
-
-	void Update () {
-		HPText.text = "HP: " + Hitpoints.ToString();
 	}
 
 	public void FireAtTarget() {

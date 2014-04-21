@@ -7,4 +7,5 @@ ProjectSettings
 *.unityproj
 Assets/Plugins
 Assets/External
+Original Assets
 **/*.meta

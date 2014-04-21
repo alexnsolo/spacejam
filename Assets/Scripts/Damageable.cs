@@ -4,6 +4,7 @@ using System.Collections;
 public class Damageable : MonoBehaviour {
 
 	public int Hitpoints;
+	public int MaxHitpoints;
 
 	public void TakeDamage(int amount) {
 		if (Hitpoints > 0) {
