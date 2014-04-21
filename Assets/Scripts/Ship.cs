@@ -48,9 +48,9 @@ public class Ship : Damageable {
 		}
 	}
 
-	public void FaceToward(Vector3 position) {
-		Vector3 direction = position - transform.position;
-		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+	public void FaceToward(Vector3 target) {
+		Vector3 dir = target - transform.position;
+		float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 
