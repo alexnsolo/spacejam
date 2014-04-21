@@ -4,6 +4,7 @@ ProjectSettings
 *.csproj
 *.sln
 *.userprefs
+*.unityproj
 Assets/Plugins
 Assets/External
 **/*.meta
