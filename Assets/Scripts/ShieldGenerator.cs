@@ -4,6 +4,7 @@ using System.Collections;
 
 public class ShieldGenerator : Subsystem {
 
+	public override string DisplayCode { get { return "SGN"; } }
 	public Shield MyShield;
 	public int RechargeAmount;
 	public float OverloadRecoveryTime;

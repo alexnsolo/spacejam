@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Weapon : Subsystem {
 
+	public override string DisplayCode { get { return "WPN"; } }
 	public Ship Owner;
 	public float CooldownTime;
 

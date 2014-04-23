@@ -3,6 +3,7 @@ using System.Collections;
 
 public class RocketLauncher : Weapon {
 
+	public override string DisplayCode { get { return "RKL"; } }
 	public Rocket RocketPrefab;
 
 	protected override void FiredAt(Transform target) {
