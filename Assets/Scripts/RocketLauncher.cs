@@ -9,6 +9,6 @@ public class RocketLauncher : Weapon {
 	protected override void FiredAt(Transform target) {
 		Rocket rocket = GameObject.Instantiate(RocketPrefab, transform.position, Quaternion.identity) as Rocket;
 		rocket.Owner = Owner;
-		rocket.FireAt(target);
+		rocket.Fire(transform.right);
 	}
 }

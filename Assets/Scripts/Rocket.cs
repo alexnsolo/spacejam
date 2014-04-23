@@ -6,8 +6,8 @@ public class Rocket : Projectile {
 	public float Speed;
 	private Vector3 direction;
 
-	public void FireAt(Transform target) {
-		direction = target.transform.position - transform.position;
+	public void Fire(Vector3 direction) {
+		this.direction = direction;
 		Update();
 		gameObject.SetActive(true);
 	}
