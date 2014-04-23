@@ -37,6 +37,7 @@ public class Ship : Damageable {
 		foreach (Engine e in Engines) {
 			if (e.Operational) {
 				totalThrust += e.Thrust;
+				e.Fire();
 			}
 		}
 		if (totalThrust > 0) {
